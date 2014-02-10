@@ -69,6 +69,6 @@ setup(
     zip_safe=True,
     install_requires=install_requires,
     tests_require=tests_require,
-    test_suite='prism_conf.tests',
+    test_suite='prismconf.tests',
     cmdclass={'test': PyTest},
 )
