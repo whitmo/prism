@@ -20,6 +20,9 @@ except:
     README = CHANGES = ''
 
 install_requires = [
+    'pyramid',
+    'path.py',
+    'rutter'
 ]
 
 if py_version < (2, 7):
@@ -68,6 +71,7 @@ setup(
     include_package_data=True,
     zip_safe=True,
     install_requires=install_requires,
+    extras_require=dict(zkconfig=['kazoo']),
     tests_require=tests_require,
     test_suite='prismconf.tests',
     cmdclass={'test': PyTest},
