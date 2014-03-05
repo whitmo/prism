@@ -22,7 +22,6 @@ except:
 install_requires = [
     'pyramid',
     'path.py',
-    'rutter'
 ]
 
 if py_version < (2, 7):
@@ -43,11 +42,11 @@ class PyTest(TestCommand):
         sys.exit(result)
 
 setup(
-    name='prism-conf',
+    name='prism',
     version='0.3.3',
     description='',
     long_description=README + '\n\n' + CHANGES,
-    url='https://github.com/whitmo/prism-conf',
+    url='https://github.com/whitmo/prism',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -63,9 +62,9 @@ setup(
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
     ],
-    keywords='',
-    author='Michael Merickel',
-    author_email='me@m.merickel.org',
+    keywords='pyramid',
+    author='Whit Morriss',
+    author_email='whit@nocoast.us',
     license='MIT',
     packages=find_packages(),
     include_package_data=True,
@@ -73,6 +72,6 @@ setup(
     install_requires=install_requires,
     extras_require=dict(zkconfig=['kazoo']),
     tests_require=tests_require,
-    test_suite='prismconf.tests',
+    test_suite='prism.tests',
     cmdclass={'test': PyTest},
 )

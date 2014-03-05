@@ -1,4 +1,4 @@
-prism-conf
-==========
+Prism
+=====
 
-Tools for managing and extending configuration of pyramid apps
+Some helpers for configuring and serving pyramid apps.
