@@ -35,32 +35,17 @@ class stacked_settings(object):
         settings = self.base_handler(global_config, **settings)
         sources = settings.get('config.sources', None)
         if not (sources is None):
-            for extra in self.additional_settings(sources):
+            for extra in self.additional_settings(sources, settings):
                 settings.update(extra)
         return settings
 
     @classmethod
     def stack_globalconfig_and_settings(cls, global_config, **settings):
         defaults = global_config.copy()
-        defaults.update(cls.load_settings_from_file(global_config['__file__']))
         defaults.update(settings)
         return defaults
 
     base_handler = stack_globalconfig_and_settings
-        
-    @staticmethod
-    def load_settings_from_file(filename):
-        here = path(filename).abspath().parent
-        parser = RawConfigParser({'here': here})
-        parser.read(filename)
-
-        settings = {}
-        for section in parser.sections():
-            prefix = section.replace(':', '.')
-            for k, v in parser.items(section):
-                settings[prefix + '.' + k] = v
-
-        return settings
 
     @staticmethod
     def asbool(value):
@@ -73,6 +58,20 @@ class stacked_settings(object):
         value = str(value).strip()
         return value.lower() in truthy
 
+    @staticmethod
+    def load_settings_from_file(filename):
+        here = path(filename).abspath().parent
+        parser = RawConfigParser({'here': here})
+        parser.read(filename)
+
+        settings = {}
+        for section in parser.sections():
+            prefix = section.replace(':', '.')
+            for k, v in parser.items(section):
+                settings[prefix + '.' + k] = v
+
+        return settings    
+    
     def to_config(cls, global_config, app_settings):
         config_file = global_config.get('__file__')
         settings = cls.load_settings_from_file(config_file)
@@ -86,6 +85,23 @@ class stacked_settings(object):
 
 
 compose_settings = stacked_settings()
+
+
+class sources(object):
+    # defaults.update(cls.load_settings_from_file(global_config['__file__']))
+
+    @staticmethod
+    def ini_file(settings):
+        settings.get()
+        if not 'config.ini_file' in settings:
+            fp = settings['__file__']
+            
+        fps = fp.strip().split('')
+        out = dict()
+        load = stacked_settings.load_settings_from_file
+        [out.update(load(fp)) for fp in fps]
+        return out
+
 
 
 def caller_module(depth=1):

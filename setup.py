@@ -14,7 +14,7 @@ def _read(path):
         return fp.read()
 
 try:
-    README = _read(os.path.join(here, 'README.rst'))
+    README = _read(os.path.join(here, 'README.md'))
     CHANGES = _read(os.path.join(here, 'CHANGES.rst'))
 except:
     README = CHANGES = ''
@@ -43,7 +43,7 @@ class PyTest(TestCommand):
 
 setup(
     name='prism',
-    version='0.3.3',
+    version='0.0',
     description='',
     long_description=README + '\n\n' + CHANGES,
     url='https://github.com/whitmo/prism',
@@ -63,7 +63,7 @@ setup(
         'Programming Language :: Python :: 3.3',
     ],
     keywords='pyramid',
-    author='Whit Morriss',
+    author='Whit Morriss and Micheal Merickel',
     author_email='whit@nocoast.us',
     license='MIT',
     packages=find_packages(),
